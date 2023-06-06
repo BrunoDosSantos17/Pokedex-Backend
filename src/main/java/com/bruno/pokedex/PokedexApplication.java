@@ -22,12 +22,18 @@ public class PokedexApplication {
 	@Bean
 	CommandLineRunner init (ReactiveMongoOperations operations, PokemonRepository repository){
 		return args -> {
-			Flux<Pokemon> pokedexFlux = Flux.just(
-					new Pokemon(null, "Bulbassaro", "Semente", "OverGrow", 6.09)
-			).flatMap(repository::save);
+				repository.findAll().hasElements().subscribe(havePokemonPokedex -> {
+					if(!havePokemonPokedex){
+						Flux<Pokemon> pokedexFlux = Flux.just(
+								new Pokemon(null, "Bulbassaro", "Semente", "OverGrow", 6.09)
+						).flatMap(repository::save);
+						pokedexFlux.thenMany(repository.findAll()).subscribe(System.out::println);
+					}
 
-			pokedexFlux.thenMany(repository.findAll()).subscribe(System.out::println);
+				});
 		};
 	}
+
+
 
 }

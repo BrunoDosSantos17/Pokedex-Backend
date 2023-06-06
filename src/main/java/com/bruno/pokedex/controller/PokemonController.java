@@ -31,6 +31,7 @@ public class PokemonController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Pokemon> savePokemon(@RequestBody Pokemon pokemon){
+        pokemon.setId(null);
         return repository.save(pokemon);
     }
 
