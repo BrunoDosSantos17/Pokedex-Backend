@@ -3,6 +3,7 @@ package com.bruno.pokedex.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Document
@@ -12,14 +13,22 @@ public class Pokemon {
     private String nome;
     private String categoria;
 
-    private String habilidade;
+    public ArrayList<Habilidade> getHabilidade() {
+        return habilidade;
+    }
+
+    public void setHabilidade(ArrayList<Habilidade> habilidade) {
+        this.habilidade = habilidade;
+    }
+
+    private ArrayList<Habilidade> habilidade;
     private Double peso;
 
     public String getId() {
         return id;
     }
 
-    public Pokemon(String id, String nome, String categoria, String habilidade, Double peso) {
+    public Pokemon(String id, String nome, String categoria, ArrayList<Habilidade> habilidade, Double peso) {
         this.id = id;
         this.nome = nome;
         this.categoria = categoria;
@@ -45,14 +54,6 @@ public class Pokemon {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-    public String getHabilidade() {
-        return habilidade;
-    }
-
-    public void setHabilidade(String habilidade) {
-        this.habilidade = habilidade;
     }
 
     public Double getPeso() {

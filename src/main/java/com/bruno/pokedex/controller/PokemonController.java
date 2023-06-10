@@ -47,7 +47,7 @@ public class PokemonController {
                     existingPokemon.setPeso(pokemon.getPeso());
                     existingPokemon.setCategoria(pokemon.getCategoria());
                     return repository.save(existingPokemon);
-        })
+        })www
                 .map(updatePokemon -> ResponseEntity.ok(updatePokemon)).
                         defaultIfEmpty(ResponseEntity.notFound().build());
     }
